@@ -5,14 +5,14 @@ import matplotlib.animation as animation
 # Parameters
 A_x = 1
 A_y = 1  
-omega1 = 2 * np.pi  
-omega2 = np.pi  
-delta = np.pi/2
+omega1 = int(input("Enter the frequency  for first SHM: "))
+omega2 =int(input("Enter the frequency for second SHM: "))  
+delta = int(input("Enter the phase difference: "))
 
-t = np.linspace(0, 2, 300)
+t = np.linspace(0, 5, 300)
 
-x = A_x * np.cos(omega2 * t)
-y = A_y * np.cos(omega1 * t)
+x = A_x * np.cos(omega1 * t)
+y = A_y * np.cos(omega2 * t + delta)
 
 fig, ax = plt.subplots()
 ax.set_xlim(-1.2, 1.2)
@@ -32,7 +32,7 @@ def init():
 
 def update(frame):
     line.set_data(x[:frame], y[:frame])
-    point.set_data([x[frame]], y[[frame]])
+    point.set_data([x[frame]], [y[frame]])
     return line, point
 
 ani = animation.FuncAnimation(fig, update, frames=len(t), init_func=init, blit=False, interval=20)
